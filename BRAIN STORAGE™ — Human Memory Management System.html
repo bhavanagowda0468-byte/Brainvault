@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:3000/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BRAIN STORAGE™ — Human Memory Management System</title>
+<style>
+:root{--bg:#070914;--card:rgba(255,255,255,.05);--bd:rgba(255,255,255,.12);--pu:#a855f7;--cy:#22d3ee;--pk:#ec4899;--tx:#e8eaf6;--mu:#8f95b8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:radial-gradient(1200px 700px at 15% -10%,#241452 0,transparent 60%),radial-gradient(900px 600px at 100% 10%,#0b3550 0,transparent 55%),#070914;background-color:#070914;color:var(--tx);min-height:100vh;overflow-x:hidden}
+.wrap{max-width:1150px;margin:0 auto;padding:22px 20px 60px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:26px}
+.logo{font-size:1.5rem;font-weight:800;letter-spacing:.06em}
+.gt{background:linear-gradient(90deg,var(--cy),var(--pu),var(--pk));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tag{color:var(--mu);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.online{display:flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid rgba(34,211,238,.4);border-radius:99px;background:rgba(34,211,238,.08);font-size:.8rem;font-weight:700;letter-spacing:.12em;color:var(--cy)}
+.online i{width:9px;height:9px;border-radius:50%;background:#34d399;box-shadow:0 0 12px #34d399;animation:pulse 1.6s infinite}
+@keyframes pulse{50%{opacity:.35;transform:scale(.8)}}
+.glass{background:var(--card);border:1px solid var(--bd);border-radius:22px;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 10px 40px rgba(0,0,0,.35)}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;align-items:center;gap:20px;padding:40px;overflow:hidden}
+.hero h1{font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.05;font-weight:800;letter-spacing:-.02em}
+.hero p{color:var(--mu);margin:16px 0 26px;font-size:1.1rem;max-width:430px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+button{font:inherit;cursor:pointer;border:0;color:#fff;transition:.25s}
+.btn{padding:13px 22px;border-radius:14px;font-weight:700;letter-spacing:.05em;font-size:.88rem}
+.btn.p{background:linear-gradient(135deg,var(--pu),var(--pk));box-shadow:0 0 24px rgba(168,85,247,.45)}
+.btn.s{background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.5);color:var(--cy)}
+.btn.w{background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.5);color:#fbbf24}
+.btn.sm{padding:8px 14px;font-size:.78rem;border-radius:10px}
+.btn:hover{transform:translateY(-3px);filter:brightness(1.15)}
+.btn:active{transform:scale(.97)}
+.btn:disabled{opacity:.6;cursor:wait}
+.brainbox{position:relative;height:300px;display:grid;place-items:center}
+.aura{position:absolute;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle,rgba(168,85,247,.65),rgba(34,211,238,.25) 45%,transparent 70%);filter:blur(24px);animation:breathe 3.5s ease-in-out infinite}
+@keyframes breathe{50%{transform:scale(1.25);opacity:.7}}
+.ring{position:absolute;border-radius:50%;border:2px dashed rgba(34,211,238,.5);animation:spin 14s linear infinite;width:250px;height:250px}
+.ring.r2{width:300px;height:300px;border:1px solid rgba(236,72,153,.4);animation-duration:22s;animation-direction:reverse}
+.ring::after{content:"";position:absolute;top:-6px;left:50%;width:12px;height:12px;border-radius:50%;background:var(--cy);box-shadow:0 0 16px 4px var(--cy)}
+.r2::after{background:var(--pk);box-shadow:0 0 16px 4px var(--pk)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.brain{font-size:130px;position:relative;filter:drop-shadow(0 0 25px rgba(236,72,153,.8));animation:float 4s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-16px) rotate(3deg)}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:20px 0}
+.stat{padding:20px;transition:.3s}
+.stat:hover,.mem:hover{transform:translateY(-6px);border-color:rgba(168,85,247,.6);box-shadow:0 14px 40px rgba(168,85,247,.25)}
+.stat small{color:var(--mu);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+.stat div{font-size:2.2rem;font-weight:800;margin-top:6px}
+.c1 div{color:var(--cy)}.c2 div{color:#34d399}.c3 div{color:var(--pu)}.c4 div{color:var(--pk)}
+.bar-card{padding:20px 24px;margin-bottom:20px}
+.bar-top{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--mu);letter-spacing:.1em;margin-bottom:10px;text-transform:uppercase;flex-wrap:wrap;gap:8px}
+.bar-top .cap-title{color:var(--cy);font-weight:700}
+.track{height:16px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;position:relative}
+.fill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--cy),var(--pu),var(--pk),var(--cy));background-size:200% 100%;animation:flow 3s linear infinite;transition:width .6s cubic-bezier(.2,.9,.3,1);box-shadow:0 0 18px var(--pu)}
+@keyframes flow{to{background-position:200% 0}}
+.vault,.diag{padding:26px}
+.vault-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+.vault-actions{display:flex;gap:10px;align-items:center}
+.diag{margin-top:20px}
+h2{font-size:1.15rem;letter-spacing:.1em}
+.inrow{display:flex;gap:12px;flex-wrap:wrap}
+input{font:inherit;color:var(--tx);background:rgba(0,0,0,.35);border:1px solid var(--bd);border-radius:14px;padding:14px 16px;outline:0;transition:.25s;flex:1;min-width:200px}
+input:focus{border-color:var(--cy);box-shadow:0 0 20px rgba(34,211,238,.3)}
+input::placeholder{color:#5f6688}
+.search{margin:16px 0 4px;width:100%}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-top:16px}
+.mem{padding:18px;display:flex;flex-direction:column;gap:12px;animation:pop .4s cubic-bezier(.2,1.2,.3,1);position:relative;overflow:hidden;background:var(--card)}
+.mem::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(var(--cy),var(--pk))}
+@keyframes pop{from{opacity:0;transform:scale(.9) translateY(16px)}}
+.mem p{word-break:break-word;padding-left:6px;line-height:1.45}
+.meta{display:flex;justify-content:space-between;align-items:center;color:var(--mu);font-size:.75rem;padding-left:6px;gap:8px}
+.forget{background:rgba(236,72,153,.12);border:1px solid rgba(236,72,153,.45);color:var(--pk);padding:6px 12px;border-radius:10px;font-size:.72rem;font-weight:700}
+.forget:hover{background:var(--pk);color:#fff;box-shadow:0 0 16px var(--pk)}
+.empty{grid-column:1/-1;text-align:center;color:var(--mu);padding:36px;font-size:1rem}
+.diag ul{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.diag li{padding:12px 16px;border-radius:12px;background:rgba(0,0,0,.3);border:1px solid var(--bd);font-family:ui-monospace,Consolas,monospace;font-size:.88rem}
+.ok{color:#34d399}.wn{color:#fbbf24}.in{color:var(--cy)}.pp{color:var(--pu)}.pn{color:var(--pk)}
+.note{margin-top:14px;color:var(--mu);font-size:.8rem;font-style:italic}
+footer{text-align:center;color:var(--mu);font-size:.78rem;margin-top:30px}
+.ov{position:fixed;inset:0;background:rgba(3,4,12,.75);backdrop-filter:blur(6px);display:none;place-items:center;z-index:50;padding:20px}
+.ov.show{display:grid;animation:fade .25s}
+@keyframes fade{from{opacity:0}}
+.modal{max-width:440px;width:100%;padding:34px 28px;text-align:center;animation:zoom .4s cubic-bezier(.2,1.3,.3,1);border-color:rgba(168,85,247,.5);box-shadow:0 0 60px rgba(168,85,247,.35);background:rgba(20,16,44,.95)}
+@keyframes zoom{from{opacity:0;transform:scale(.7) translateY(30px)}}
+.ic{font-size:3rem;margin-bottom:8px}
+.modal h3{font-size:1.25rem;letter-spacing:.12em;margin-bottom:12px}
+.modal p{font-size:1.05rem;line-height:1.5;margin-bottom:22px;white-space:pre-line}
+.toast{position:fixed;bottom:24px;left:50%;transform:translate(-50%,140px);padding:14px 24px;border-radius:14px;background:rgba(16,60,48,.92);border:1px solid #34d399;color:#a7f3d0;font-weight:600;z-index:60;transition:.45s cubic-bezier(.2,1.2,.3,1);max-width:92vw}
+.toast.show{transform:translate(-50%,0)}
+.toast.bad{background:rgba(70,20,50,.94);border-color:var(--pk);color:#fbcfe8}
+@media(max-width:860px){.hero{grid-template-columns:1fr;padding:26px;text-align:center}.hero p{margin-inline:auto}.btns{justify-content:center}.stats{grid-template-columns:repeat(2,1fr)}.brainbox{height:260px;order:-1}.brain{font-size:100px}.aura,.ring{width:210px;height:210px}.ring.r2{width:250px;height:250px}}
+@media(max-width:480px){.btn{width:100%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div><div class="logo">🧠 <span class="gt">BRAIN STORAGE™</span></div><div class="tag">Human Memory Management System</div></div>
+  <div class="online" id="statusBadge"><i></i><span>BRAIN ONLINE • SYNCED</span></div>
+</header>
+
+<section class="glass hero">
+  <div>
+    <h1>Your brain.<br><span class="gt">Now with storage.</span></h1>
+    <p>Save important thoughts before they mysteriously disappear.</p>
+    <div class="btns">
+      <button class="btn p" id="focusBtn">+ SAVE A MEMORY</button>
+      <button class="btn s" id="scanBtn">🧠 RUN BRAIN SCAN</button>
+      <button class="btn w" id="errBtn">⚠️ SIMULATE ERROR</button>
+    </div>
+  </div>
+  <div class="brainbox"><div class="aura"></div><div class="ring"></div><div class="ring r2"></div><div class="brain">🧠</div></div>
+</section>
+
+<section class="stats">
+  <div class="glass stat c1"><small>Storage Used</small><div id="stStorage">0.4%</div></div>
+  <div class="glass stat c2"><small>Brain Health</small><div id="stHealth">100%</div></div>
+  <div class="glass stat c3"><small>Memories Saved</small><div id="stCount">41</div></div>
+  <div class="glass stat c4"><small>Distraction</small><div id="stDist">12%</div></div>
+</section>
+
+<section class="glass bar-card">
+  <div class="bar-top">
+    <span class="cap-title">Brain Capacity: 10,000 memories</span>
+    <span id="barLabel">Total: 41 active memories</span>
+  </div>
+  <div class="track"><div class="fill" id="fill" aria-valuenow="41" aria-valuemax="10000" title="41 of 10,000 memories (0.4% used)" style="width: 6.4%;"></div></div>
+</section>
+
+<section class="glass vault">
+  <div class="vault-header">
+    <h2>🗄️ MEMORY VAULT</h2>
+    <div class="vault-actions">
+      <button class="btn s sm" id="sampleBtn" title="Quickly add 20 sample memories to verify 100+ capacity">⚡ LOAD 20 SAMPLES</button>
+      <button class="btn w sm" id="clearBtn" title="Clear all memories from your brain vault">🧹 CLEAR VAULT</button>
+    </div>
+  </div>
+  <div class="inrow">
+    <input id="memInput" type="text" maxlength="240" placeholder="Type a memory… e.g. I have an exam tomorrow" autocomplete="off">
+    <button class="btn p" id="saveBtn">SAVE MEMORY</button>
+  </div>
+  <input class="search" id="search" type="text" placeholder="🔍 Search your brain..." autocomplete="off">
+  <div class="grid" id="grid"><div class="glass mem" data-id="1790763288570-985431"><p>Presentation is on oct 5th</p><div class="meta"><span>🕒 Sep 30 • 03:44 PM</span><button class="forget" aria-label="Forget memory: Presentation is on oct 5th">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772692-821999"><p>Remember where I parked the spaceship at the mall</p><div class="meta"><span>🕒 Sep 30 • 03:36 PM</span><button class="forget" aria-label="Forget memory: Remember where I parked the spaceship at the mall">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772693-220516"><p>Buy milk, eggs, sourdough bread, and coffee beans</p><div class="meta"><span>🕒 Sep 30 • 03:33 PM</span><button class="forget" aria-label="Forget memory: Buy milk, eggs, sourdough bread, and coffee beans">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772694-397306"><p>Mom's birthday is October 14th — do not forget the gift!</p><div class="meta"><span>🕒 Sep 30 • 03:30 PM</span><button class="forget" aria-label="Forget memory: Mom's birthday is October 14th — do not forget the gift!">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772695-69832"><p>The mitochondria is the powerhouse of the cell</p><div class="meta"><span>🕒 Sep 30 • 03:27 PM</span><button class="forget" aria-label="Forget memory: The mitochondria is the powerhouse of the cell">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161146-5159523"><p>Remember where I parked the spaceship at the mall</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Remember where I parked the spaceship at the mall">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-2329796"><p>Buy milk, eggs, sourdough bread, and coffee beans</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Buy milk, eggs, sourdough bread, and coffee beans">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-8543041"><p>Mom's birthday is October 14th — do not forget the gift!</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Mom's birthday is October 14th — do not forget the gift!">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-993605"><p>The mitochondria is the powerhouse of the cell</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: The mitochondria is the powerhouse of the cell">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-3890773"><p>Dentist appointment Tuesday at 3:30 PM</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Dentist appointment Tuesday at 3:30 PM">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-7547372"><p>Wi-Fi password for coffee shop: C@ff31n3_Dr34ms!</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Wi-Fi password for coffee shop: C@ff31n3_Dr34ms!">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-8954263"><p>Idea: An alarm clock that donates $5 to charity every time you snooze</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Idea: An alarm clock that donates $5 to charity every time you snooze">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-101756"><p>Flight 402 departs at 6:45 AM from Terminal 3</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Flight 402 departs at 6:45 AM from Terminal 3">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-9567234"><p>Book recommendation: Thinking, Fast and Slow by Daniel Kahneman</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Book recommendation: Thinking, Fast and Slow by Daniel Kahneman">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-6072168"><p>Remember to water the bonsai tree every Friday</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Remember to water the bonsai tree every Friday">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-4684536"><p>Passport renewal deadline is before the summer trip</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Passport renewal deadline is before the summer trip">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-7474522"><p>Guitar chords for tomorrow's jam: G - D - Em - C</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Guitar chords for tomorrow's jam: G - D - Em - C">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-9016835"><p>Secret family tomato sauce recipe: add fresh basil and garlic</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Secret family tomato sauce recipe: add fresh basil and garlic">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-2828321"><p>Return library books before overdue fines strike again</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Return library books before overdue fines strike again">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-9306152"><p>Project deadline moved to Friday 5 PM — finish the unit tests first</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Project deadline moved to Friday 5 PM — finish the unit tests first">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-9042914"><p>Meeting notes: quarterly goals centered on memory retention</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Meeting notes: quarterly goals centered on memory retention">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-1663838"><p>Car insurance policy renewal number #98234-A</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Car insurance policy renewal number #98234-A">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-5935391"><p>Favorite quote: 'Simplicity is the soul of efficiency.'</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Favorite quote: 'Simplicity is the soul of efficiency.'">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-1430406"><p>Remember to turn off the oven before leaving the house!</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Remember to turn off the oven before leaving the house!">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762161147-6844928"><p>Brain storage v2.0 capacity upgraded to 10,000 memories successfully</p><div class="meta"><span>🕒 Sep 30 • 03:26 PM</span><button class="forget" aria-label="Forget memory: Brain storage v2.0 capacity upgraded to 10,000 memories successfully">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772696-853181"><p>Dentist appointment Tuesday at 3:30 PM</p><div class="meta"><span>🕒 Sep 30 • 03:24 PM</span><button class="forget" aria-label="Forget memory: Dentist appointment Tuesday at 3:30 PM">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772697-977567"><p>Wi-Fi password for coffee shop: C@ff31n3_Dr34ms!</p><div class="meta"><span>🕒 Sep 30 • 03:21 PM</span><button class="forget" aria-label="Forget memory: Wi-Fi password for coffee shop: C@ff31n3_Dr34ms!">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772698-316175"><p>Idea: An alarm clock that donates $5 to charity every time you snooze</p><div class="meta"><span>🕒 Sep 30 • 03:18 PM</span><button class="forget" aria-label="Forget memory: Idea: An alarm clock that donates $5 to charity every time you snooze">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772699-42458"><p>Flight 402 departs at 6:45 AM from Terminal 3</p><div class="meta"><span>🕒 Sep 30 • 03:15 PM</span><button class="forget" aria-label="Forget memory: Flight 402 departs at 6:45 AM from Terminal 3">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772700-774382"><p>Book recommendation: Thinking, Fast and Slow by Daniel Kahneman</p><div class="meta"><span>🕒 Sep 30 • 03:12 PM</span><button class="forget" aria-label="Forget memory: Book recommendation: Thinking, Fast and Slow by Daniel Kahneman">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772701-751461"><p>Remember to water the bonsai tree every Friday</p><div class="meta"><span>🕒 Sep 30 • 03:09 PM</span><button class="forget" aria-label="Forget memory: Remember to water the bonsai tree every Friday">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772702-569640"><p>Passport renewal deadline is before the summer trip</p><div class="meta"><span>🕒 Sep 30 • 03:06 PM</span><button class="forget" aria-label="Forget memory: Passport renewal deadline is before the summer trip">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772703-10307"><p>Guitar chords for tomorrow's jam: G - D - Em - C</p><div class="meta"><span>🕒 Sep 30 • 03:03 PM</span><button class="forget" aria-label="Forget memory: Guitar chords for tomorrow's jam: G - D - Em - C">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772704-312625"><p>Secret family tomato sauce recipe: add fresh basil and garlic</p><div class="meta"><span>🕒 Sep 30 • 03:00 PM</span><button class="forget" aria-label="Forget memory: Secret family tomato sauce recipe: add fresh basil and garlic">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772705-902772"><p>Return library books before overdue fines strike again</p><div class="meta"><span>🕒 Sep 30 • 02:57 PM</span><button class="forget" aria-label="Forget memory: Return library books before overdue fines strike again">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772706-379668"><p>Project deadline moved to Friday 5 PM — finish the unit tests first</p><div class="meta"><span>🕒 Sep 30 • 02:54 PM</span><button class="forget" aria-label="Forget memory: Project deadline moved to Friday 5 PM — finish the unit tests first">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772707-536155"><p>Meeting notes: quarterly goals centered on memory retention</p><div class="meta"><span>🕒 Sep 30 • 02:51 PM</span><button class="forget" aria-label="Forget memory: Meeting notes: quarterly goals centered on memory retention">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772708-507185"><p>Car insurance policy renewal number #98234-A</p><div class="meta"><span>🕒 Sep 30 • 02:48 PM</span><button class="forget" aria-label="Forget memory: Car insurance policy renewal number #98234-A">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772709-575944"><p>Favorite quote: 'Simplicity is the soul of efficiency.'</p><div class="meta"><span>🕒 Sep 30 • 02:45 PM</span><button class="forget" aria-label="Forget memory: Favorite quote: 'Simplicity is the soul of efficiency.'">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772710-737908"><p>Remember to turn off the oven before leaving the house!</p><div class="meta"><span>🕒 Sep 30 • 02:42 PM</span><button class="forget" aria-label="Forget memory: Remember to turn off the oven before leaving the house!">🗑 FORGET</button></div></div><div class="glass mem" data-id="1790762772711-708404"><p>Brain storage v2.0 capacity upgraded to 10,000 memories successfully</p><div class="meta"><span>🕒 Sep 30 • 02:39 PM</span><button class="forget" aria-label="Forget memory: Brain storage v2.0 capacity upgraded to 10,000 memories successfully">🗑 FORGET</button></div></div></div>
+</section>
+
+<section class="glass diag">
+  <h2>🔬 BRAIN DIAGNOSTICS</h2>
+  <ul>
+    <li><span class="ok">✓</span> Memory module: <span class="ok" id="diagStorage">OPERATIONAL (IndexedDB)</span></li>
+    <li><span class="wn">⚠</span> Focus: <span class="wn">UNSTABLE</span></li>
+    <li>☕ Caffeine dependency: <span class="pp">UNKNOWN</span></li>
+    <li>📚 Exam readiness: <span class="in" id="calc">CALCULATING.</span></li>
+    <li>🧠 Common sense: <span class="pn">DETECTED*</span></li>
+    <li>📡 Cloud Sync: <span class="ok" id="diagSync">CONNECTED (REST API)</span></li>
+  </ul>
+  <div class="note">*Results are scientifically questionable.</div>
+</section>
+
+<footer>BRAIN STORAGE™ • Memories live in your browser's IndexedDB storage • No brains were harmed</footer>
+</div>
+
+<div class="ov" id="ov"><div class="glass modal"><div class="ic" id="mIc"></div><h3 class="gt" id="mTitle"></h3><p id="mText"></p><button class="btn p" id="mClose">OK, FINE</button></div></div>
+<div class="toast" id="toast">✅ Memory saved successfully!</div>
+
+<script>
+(function(){
+  var CAPACITY = 10000;
+  var LEGACY_KEY = "brain_storage_memories_v1";
+  var DB_NAME = "BrainStorageDB";
+  var DB_VERSION = 1;
+  var STORE_NAME = "memories";
+
+  var mems = [];
+  var db = null;
+  var hasBackend = false;
+  var backendUrl = "";
+
+  var $ = function(i){ return document.getElementById(i); };
+  var input = $("memInput"),
+      grid = $("grid"),
+      search = $("search"),
+      toastEl = $("toast"),
+      ov = $("ov");
+
+  function toast(msg, bad){
+    toastEl.textContent = msg;
+    toastEl.className = "toast show" + (bad ? " bad" : "");
+    clearTimeout(toast.t);
+    toast.t = setTimeout(function(){
+      toastEl.className = "toast" + (bad ? " bad" : "");
+    }, 2400);
+  }
+
+  function modal(icon, title, text){
+    $("mIc").textContent = icon;
+    $("mTitle").textContent = title;
+    $("mText").textContent = text;
+    ov.classList.add("show");
+  }
+
+  function closeModal(){ ov.classList.remove("show"); }
+  $("mClose").onclick = closeModal;
+  ov.onclick = function(e){ if(e.target === ov) closeModal(); };
+  document.addEventListener("keydown", function(e){ if(e.key === "Escape") closeModal(); });
+
+  function fmt(ts){
+    try {
+      var d = new Date(ts);
+      return d.toLocaleDateString(undefined, {month:"short", day:"numeric"}) + " • " + d.toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
+    } catch(err) {
+      return "Recently";
+    }
+  }
+
+  // --- IndexedDB Management ---
+  function openIndexedDB(){
+    return new Promise(function(resolve, reject){
+      if (!window.indexedDB) {
+        reject(new Error("IndexedDB is not supported in this browser."));
+        return;
+      }
+      var request = indexedDB.open(DB_NAME, DB_VERSION);
+      request.onupgradeneeded = function(e){
+        var d = e.target.result;
+        if (!d.objectStoreNames.contains(STORE_NAME)) {
+          var store = d.createObjectStore(STORE_NAME, { keyPath: "id" });
+          store.createIndex("time", "time", { unique: false });
+        }
+      };
+      request.onsuccess = function(e){
+        db = e.target.result;
+        resolve(db);
+      };
+      request.onerror = function(e){
+        reject(e.target.error || new Error("Failed to open IndexedDB"));
+      };
+    });
+  }
+
+  function idbGetAll(){
+    return new Promise(function(resolve, reject){
+      if (!db) { return resolve([]); }
+      try {
+        var tx = db.transaction(STORE_NAME, "readonly");
+        var store = tx.objectStore(STORE_NAME);
+        var req = store.getAll();
+        req.onsuccess = function(){ resolve(req.result || []); };
+        req.onerror = function(){ reject(req.error); };
+      } catch(err) {
+        reject(err);
+      }
+    });
+  }
+
+  function idbPut(item){
+    return new Promise(function(resolve, reject){
+      if (!db) { return reject(new Error("Database not initialized")); }
+      try {
+        var tx = db.transaction(STORE_NAME, "readwrite");
+        var store = tx.objectStore(STORE_NAME);
+        var req = store.put(item);
+        req.onsuccess = function(){ resolve(item); };
+        req.onerror = function(e){ reject(req.error || e); };
+      } catch(err) {
+        reject(err);
+      }
+    });
+  }
+
+  function idbPutBulk(items){
+    return new Promise(function(resolve, reject){
+      if (!db) { return reject(new Error("Database not initialized")); }
+      try {
+        var tx = db.transaction(STORE_NAME, "readwrite");
+        var store = tx.objectStore(STORE_NAME);
+        items.forEach(function(item){ store.put(item); });
+        tx.oncomplete = function(){ resolve(items); };
+        tx.onerror = function(e){ reject(tx.error || e); };
+      } catch(err) {
+        reject(err);
+      }
+    });
+  }
+
+  function idbDelete(id){
+    return new Promise(function(resolve, reject){
+      if (!db) { return reject(new Error("Database not initialized")); }
+      try {
+        var tx = db.transaction(STORE_NAME, "readwrite");
+        var store = tx.objectStore(STORE_NAME);
+        var req = store.delete(id);
+        req.onsuccess = function(){ resolve(id); };
+        req.onerror = function(e){ reject(req.error || e); };
+      } catch(err) {
+        reject(err);
+      }
+    });
+  }
+
+  function idbClear(){
+    return new Promise(function(resolve, reject){
+      if (!db) { return resolve(); }
+      try {
+        var tx = db.transaction(STORE_NAME, "readwrite");
+        var store = tx.objectStore(STORE_NAME);
+        var req = store.clear();
+        req.onsuccess = function(){ resolve(); };
+        req.onerror = function(e){ reject(req.error || e); };
+      } catch(err) {
+        reject(err);
+      }
+    });
+  }
+
+  // Fallback to localStorage if IndexedDB is blocked/unavailable
+  var fallbackMode = false;
+  function fallbackPersist(){
+    try {
+      localStorage.setItem(LEGACY_KEY, JSON.stringify(mems));
+    } catch(e) {
+      handleStorageError(e);
+    }
+  }
+
+  function handleStorageError(err){
+    console.error("Storage error encountered:", err);
+    var isQuota = err && (err.name === "QuotaExceededError" || err.name === "NS_ERROR_DOM_QUOTA_REACHED" || err.code === 22);
+    if (isQuota) {
+      modal("💾", "STORAGE FULL", "Your browser's storage capacity has been reached.\nPlease forget some memories to free up space.");
+    } else {
+      modal("⚠️", "STORAGE UNAVAILABLE", "Unable to persist memory to browser storage:\n" + (err.message || "Unknown storage restriction."));
+    }
+  }
+
+  // --- Backend Check & Sync ---
+  async function checkBackend(){
+    try {
+      var res = await fetch("/api/health", { method: "GET", cache: "no-store" });
+      if (res.ok) {
+        var json = await res.json();
+        if (json.status === "ONLINE") {
+          hasBackend = true;
+          $("statusBadge").innerHTML = "<i></i><span>BRAIN ONLINE • SYNCED</span>";
+          $("diagSync").className = "ok";
+          $("diagSync").textContent = "CONNECTED (REST API)";
+          return true;
+        }
+      }
+    } catch(e) {
+      // Backend not running or static file host
+    }
+    hasBackend = false;
+    $("statusBadge").innerHTML = "<i></i><span>BRAIN ONLINE • IDB ACTIVE</span>";
+    $("diagSync").className = "in";
+    $("diagSync").textContent = "OFFLINE (IDB ACTIVE)";
+    return false;
+  }
+
+  // --- Migration & Initialization ---
+  async function init(){
+    // 1. Initialize IndexedDB
+    try {
+      await openIndexedDB();
+      $("diagStorage").textContent = "OPERATIONAL (IndexedDB)";
+    } catch(err) {
+      console.warn("IndexedDB init failed, using localStorage fallback:", err);
+      fallbackMode = true;
+      $("diagStorage").className = "wn";
+      $("diagStorage").textContent = "FALLBACK (localStorage)";
+    }
+
+    // 2. Load memories from IndexedDB
+    if (!fallbackMode) {
+      try {
+        var stored = await idbGetAll();
+        if (Array.isArray(stored) && stored.length > 0) {
+          mems = stored;
+        }
+      } catch(e) {
+        console.error("Error reading from IndexedDB:", e);
+      }
+    }
+
+    // 3. Migrate from existing localStorage if present (Keep all existing memories!)
+    try {
+      var raw = localStorage.getItem(LEGACY_KEY);
+      if (raw) {
+        var legacy = JSON.parse(raw);
+        if (Array.isArray(legacy) && legacy.length > 0) {
+          var currentIds = new Set(mems.map(function(m){ return m.id; }));
+          var migrated = [];
+          legacy.forEach(function(m){
+            if (m && m.text && !currentIds.has(m.id)) {
+              migrated.push(m);
+              mems.push(m);
+            }
+          });
+          if (migrated.length > 0 && !fallbackMode) {
+            await idbPutBulk(migrated);
+            console.log("Migrated " + migrated.length + " legacy memories from localStorage into IndexedDB.");
+          }
+        }
+      }
+    } catch(e){
+      console.warn("Legacy migration notice:", e);
+    }
+
+    // If fallbackMode, load from localStorage directly
+    if (fallbackMode && mems.length === 0) {
+      try {
+        var r = localStorage.getItem(LEGACY_KEY);
+        if (r) {
+          var p = JSON.parse(r);
+          if (Array.isArray(p)) mems = p.filter(function(m){ return m && typeof m.text === "string"; });
+        }
+      } catch(e) { mems = []; }
+    }
+
+    // 4. Check backend API connection
+    var isOnline = await checkBackend();
+    if (isOnline) {
+      try {
+        var res = await fetch("/api/memories");
+        if (res.ok) {
+          var data = await res.json();
+          if (data && Array.isArray(data.memories) && data.memories.length > 0) {
+            // Merge backend memories with local
+            var localIds = new Set(mems.map(function(m){ return m.id; }));
+            var newFromServer = [];
+            data.memories.forEach(function(m){
+              if (m && m.text && !localIds.has(m.id)) {
+                mems.push(m);
+                newFromServer.push(m);
+              }
+            });
+            if (newFromServer.length > 0 && !fallbackMode) {
+              await idbPutBulk(newFromServer);
+            }
+          } else if (mems.length > 0) {
+            // Upload local memories to backend
+            await fetch("/api/memories/bulk", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ memories: mems })
+            });
+          }
+        }
+      } catch(e) {
+        console.warn("Backend sync notice:", e);
+      }
+    }
+
+    render();
+  }
+
+  // --- Rendering UI ---
+  function renderStats(){
+    var n = mems.length;
+    var pct = (n / CAPACITY) * 100;
+    var displayPct;
+    if (n === 0) {
+      displayPct = "0%";
+    } else if (pct < 0.1) {
+      displayPct = pct.toFixed(2) + "%";
+    } else if (pct < 10) {
+      displayPct = pct.toFixed(1) + "%";
+    } else {
+      displayPct = Math.round(pct) + "%";
+    }
+
+    // Progress bar width: dynamically scales smoothly for 1-100+ memories up to 10,000 fictional capacity
+    var barWidth;
+    if (n === 0) {
+      barWidth = "0%";
+    } else {
+      // Dynamic perceptual curve so every added memory visibly expands the progress bar
+      var visualPct = Math.min(100, Math.max(1, Math.round(Math.pow(n / CAPACITY, 0.5) * 1000) / 10));
+      barWidth = visualPct + "%";
+    }
+
+    $("stStorage").textContent = displayPct;
+    $("stHealth").textContent = Math.max(10, Math.round(100 - (n / CAPACITY) * 75)) + "%";
+    $("stCount").textContent = n.toLocaleString();
+    var fillEl = $("fill");
+    fillEl.style.width = barWidth;
+    fillEl.setAttribute("aria-valuenow", n);
+    fillEl.setAttribute("aria-valuemax", CAPACITY);
+    fillEl.setAttribute("title", n + " of " + CAPACITY.toLocaleString() + " memories (" + displayPct + " used)");
+    $("barLabel").textContent = "Total: " + n.toLocaleString() + " active memories";
+  }
+
+  function renderCards(){
+    var q = search.value.trim().toLowerCase();
+    grid.innerHTML = "";
+    var list = mems.filter(function(m){
+      return m.text && m.text.toLowerCase().indexOf(q) !== -1;
+    });
+
+    if(!list.length){
+      var e = document.createElement("div");
+      e.className = "empty";
+      e.textContent = mems.length ? "No matching memories. Your brain has nothing on that." : "Your vault is empty. Suspiciously like your brain during exams.";
+      grid.appendChild(e);
+      return;
+    }
+
+    // Display newest first
+    list.slice().sort(function(a, b){ return (b.time || 0) - (a.time || 0); }).forEach(function(m){
+      var c = document.createElement("div");
+      c.className = "glass mem";
+      c.setAttribute("data-id", m.id);
+
+      var p = document.createElement("p");
+      p.textContent = m.text;
+
+      var meta = document.createElement("div");
+      meta.className = "meta";
+
+      var t = document.createElement("span");
+      t.textContent = "🕒 " + fmt(m.time);
+
+      var b = document.createElement("button");
+      b.className = "forget";
+      b.textContent = "🗑 FORGET";
+      b.setAttribute("aria-label", "Forget memory: " + m.text);
+      b.onclick = function(){ forget(m.id); };
+
+      meta.appendChild(t);
+      meta.appendChild(b);
+      c.appendChild(p);
+      c.appendChild(meta);
+      grid.appendChild(c);
+    });
+  }
+
+  function render(){
+    renderStats();
+    renderCards();
+  }
+
+  // --- Memory Operations ---
+  async function save(){
+    var text = input.value.trim();
+    if(!text){
+      toast("Your brain can't store nothing. (Though it tries.)", true);
+      input.focus();
+      return;
+    }
+
+    var newMem = {
+      id: Date.now() + "-" + Math.floor(Math.random() * 1e6),
+      text: text,
+      time: Date.now()
+    };
+
+    try {
+      if (fallbackMode) {
+        mems.push(newMem);
+        fallbackPersist();
+      } else {
+        await idbPut(newMem);
+        mems.push(newMem);
+      }
+
+      // Also persist to localStorage backup for safety
+      try { localStorage.setItem(LEGACY_KEY, JSON.stringify(mems)); } catch(e){}
+
+      // Sync with backend if available
+      if (hasBackend) {
+        fetch("/api/memories", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newMem)
+        }).catch(function(err){ console.warn("Backend sync post warning:", err); });
+      }
+
+      input.value = "";
+      render();
+      toast("✅ Memory saved successfully!");
+    } catch(err) {
+      handleStorageError(err);
+    }
+  }
+
+  async function forget(id){
+    try {
+      if (fallbackMode) {
+        mems = mems.filter(function(m){ return m.id !== id; });
+        fallbackPersist();
+      } else {
+        await idbDelete(id);
+        mems = mems.filter(function(m){ return m.id !== id; });
+      }
+
+      try { localStorage.setItem(LEGACY_KEY, JSON.stringify(mems)); } catch(e){}
+
+      if (hasBackend) {
+        fetch("/api/memories/" + encodeURIComponent(id), {
+          method: "DELETE"
+        }).catch(function(err){ console.warn("Backend sync delete warning:", err); });
+      }
+
+      render();
+      modal("🗑️", "MEMORY DELETED", "Memory deleted.\nYou may now pretend you never knew it.");
+    } catch(err) {
+      handleStorageError(err);
+    }
+  }
+
+  async function clearAll(){
+    if (!confirm("Are you sure you want to completely erase all memories from your brain vault?")) return;
+    try {
+      if (fallbackMode) {
+        mems = [];
+        fallbackPersist();
+      } else {
+        await idbClear();
+        mems = [];
+      }
+      try { localStorage.removeItem(LEGACY_KEY); } catch(e){}
+
+      if (hasBackend) {
+        fetch("/api/memories", { method: "DELETE" }).catch(function(e){});
+      }
+
+      render();
+      toast("🧹 Brain vault completely cleared!");
+    } catch(err) {
+      handleStorageError(err);
+    }
+  }
+
+  // --- Sample 20 Memories Generator (For Verification & Demo) ---
+  var sampleList = [
+    "Remember where I parked the spaceship at the mall",
+    "Buy milk, eggs, sourdough bread, and coffee beans",
+    "Mom's birthday is October 14th — do not forget the gift!",
+    "The mitochondria is the powerhouse of the cell",
+    "Dentist appointment Tuesday at 3:30 PM",
+    "Wi-Fi password for coffee shop: C@ff31n3_Dr34ms!",
+    "Idea: An alarm clock that donates $5 to charity every time you snooze",
+    "Flight 402 departs at 6:45 AM from Terminal 3",
+    "Book recommendation: Thinking, Fast and Slow by Daniel Kahneman",
+    "Remember to water the bonsai tree every Friday",
+    "Passport renewal deadline is before the summer trip",
+    "Guitar chords for tomorrow's jam: G - D - Em - C",
+    "Secret family tomato sauce recipe: add fresh basil and garlic",
+    "Return library books before overdue fines strike again",
+    "Project deadline moved to Friday 5 PM — finish the unit tests first",
+    "Meeting notes: quarterly goals centered on memory retention",
+    "Car insurance policy renewal number #98234-A",
+    "Favorite quote: 'Simplicity is the soul of efficiency.'",
+    "Remember to turn off the oven before leaving the house!",
+    "Brain storage v2.0 capacity upgraded to 10,000 memories successfully"
+  ];
+
+  async function loadSamples(){
+    var now = Date.now();
+    var newBatch = sampleList.map(function(text, idx){
+      return {
+        id: (now + idx) + "-" + Math.floor(Math.random() * 1e6),
+        text: text,
+        time: now - (idx * 180000) // staggered times
+      };
+    });
+
+    try {
+      if (fallbackMode) {
+        mems = mems.concat(newBatch);
+        fallbackPersist();
+      } else {
+        await idbPutBulk(newBatch);
+        mems = mems.concat(newBatch);
+      }
+
+      try { localStorage.setItem(LEGACY_KEY, JSON.stringify(mems)); } catch(e){}
+
+      if (hasBackend) {
+        fetch("/api/memories/bulk", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ memories: newBatch })
+        }).catch(function(e){});
+      }
+
+      render();
+      toast("⚡ Added 20 sample memories! Total: " + mems.length);
+    } catch(err) {
+      handleStorageError(err);
+    }
+  }
+
+  // --- Event Listeners ---
+  $("saveBtn").onclick = save;
+  $("sampleBtn").onclick = loadSamples;
+  $("clearBtn").onclick = clearAll;
+
+  input.addEventListener("keydown", function(e){
+    if(e.key === "Enter"){
+      e.preventDefault();
+      save();
+    }
+  });
+
+  search.addEventListener("input", renderCards);
+
+  $("focusBtn").onclick = function(){
+    input.scrollIntoView({ behavior:"smooth", block:"center" });
+    setTimeout(function(){ input.focus(); }, 400);
+  };
+
+  var scans = [
+    ["🚨","CRITICAL ERROR","You forgot why you opened this app."],
+    ["💥","MEMORY CORRUPTED","We found the memory, but it refused to cooperate."],
+    ["🔎","SCAN COMPLETE","Memory found.\nConfidence: 43%.\nLocation: probably your bag."],
+    ["⚠️","WARNING","Your brain is remembering everything except the syllabus."],
+    ["🛑","SYSTEM ERROR","404: Motivation not found."]
+  ];
+
+  var errs = [
+    ["🧠","RAM FULL","RAM FULL.\nPlease close 17 imaginary tabs."],
+    ["🔒","ACCESS DENIED","Permission denied:\nYou are not allowed to remember everything."],
+    ["🔥","HIGH CPU USAGE","Background process 'Overthinking' is consuming 94% CPU."],
+    ["📉","KERNEL PANIC","Kernel panic: attempted to recall childhood phone number."],
+    ["🌀","STACK OVERFLOW","Too many thoughts about tomorrow. Please try again never."]
+  ];
+
+  var last = {};
+  function pick(a, k){
+    var i;
+    do { i = Math.floor(Math.random() * a.length); }
+    while (i === last[k] && a.length > 1);
+    last[k] = i;
+    return a[i];
+  }
+
+  $("scanBtn").onclick = function(){
+    var b = $("scanBtn");
+    b.textContent = "⏳ SCANNING…";
+    b.disabled = true;
+    $("stDist").textContent = (10 + Math.floor(Math.random() * 70)) + "%";
+    setTimeout(function(){
+      b.textContent = "🧠 RUN BRAIN SCAN";
+      b.disabled = false;
+      var r = pick(scans, "s");
+      modal(r[0], r[1], r[2]);
+    }, 1100);
+  };
+
+  $("errBtn").onclick = function(){
+    var r = pick(errs, "e");
+    modal(r[0], r[1], r[2]);
+  };
+
+  var d = 0;
+  setInterval(function(){
+    d = (d + 1) % 4;
+    $("calc").textContent = "CALCULATING" + ".".repeat(d);
+  }, 450);
+
+  // Expose test helper to window for automated testing and inspection
+  window.BrainStorage = {
+    getMemories: function(){ return mems; },
+    addSampleMemories: loadSamples,
+    saveMemory: function(text){ input.value = text; return save(); },
+    forgetMemory: forget,
+    clearAll: clearAll,
+    getDb: function(){ return db; }
+  };
+
+  // Start initialization
+  init();
+})();
+</script>
+
+
+</body></html>
